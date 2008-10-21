@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'kn_sitemap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">KN Sitemap</label>
+			<label index="config">Config</label>
+			<label index="startingpoint">Startingpoint</label>
+			<label index="main">Main</label>
+			<label index="exclude_pages">Exclude Pages:</label>
+		</languageKey>
+	</data>
+</T3locallang>

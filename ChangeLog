@@ -1,0 +1,52 @@
+
+08-10-21 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Move to forge.typo3.org
+
+08-10-18 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Feature: Added realURL-Support to ajax.php
+
+08-10-16 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Clean Up: CGL fixes
+
+08-10-14 Andreas.Stein <external.andreas.stein@kuehne-nagel.com>
+	* Bugfix: Added icon for new element wizzard
+
+08-07-10 Martin.Kuster
+	*  Clean Up: Updated phpDocs
+
+08-06-26 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Feature: RealURL ready (pi1).
+	* Clean Up: UTF-8 - Refactoring, no functional changes
+
+08-03-11 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Bugfix: valid html (added alt-parameter in img-tags)
+
+08-01-31 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Clean Up: Update Mail
+
+07-12-04 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Bugfix: Doktype 111 (KN Country) added
+
+07-11-05 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Feature: Configuration via TS
+
+07-11-02 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Clean Up: Code-Cleaning
+
+07-10-25 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Move to jquery
+	* Use an extension for jquery
+	* Bugfix: Don't show hidden pages (time)
+	* Clean Up: Move CSS into TS
+
+07-10-24 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+
+	* Bugfix: Don't show protected pages
+
+07-10-22 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+
+	* Initial Version 1.0.0
+
+07-10-18 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+
+	* Initial release

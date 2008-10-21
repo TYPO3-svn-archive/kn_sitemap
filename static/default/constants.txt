@@ -1,0 +1,1 @@
+# $Id: constants.txt,v 1.2 2007/11/02 14:13:22 Martin.Kuster Exp $
