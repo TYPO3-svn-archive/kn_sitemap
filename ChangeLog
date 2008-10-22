@@ -1,4 +1,7 @@
 
+08-10-22 Martin Kuster  <martin.kuster@kuehne-nagel.com>
+	* Replaced a-tags around open/close images with span-tags
+
 08-10-21 Martin Kuster  <martin.kuster@kuehne-nagel.com>
 	* Move to forge.typo3.org
 

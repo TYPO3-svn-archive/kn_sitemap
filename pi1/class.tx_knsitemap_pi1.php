@@ -290,12 +290,12 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 				// Letzte Subseite?
 				if ($i >= $countSubpages){
 					// Öffnender Link abgeschlossen:
-					$linkToSubpages= '<a class="open" href="'.$this->requestUri.'#" title="Open" onClick="upd(\''.$row['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></a>';
+					$linkToSubpages= '<span class="open" title="Open" onClick="upd(\''.$row['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></span>';
 					$class = 'hasSubpages';
 			//		$this->closeJSCode .= 'upd(\''.$row['uid'].'\',\'1\',\'1\');'."\n";
 				} else {
 					// Öffnender Link normal:
-					$linkToSubpages= '<a class="open" href="'.$this->requestUri.'#" title="Open" onClick="upd(\''.$row['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></a>';
+					$linkToSubpages= '<span class="open" title="Open" onClick="upd(\''.$row['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></span	>';
 					$class = 'hasSubpages';
 			//		$this->closeJSCode .= 'upd(\''.$row['uid'].'\',\'0\',\'1\');'."\n";
 				}

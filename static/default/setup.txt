@@ -11,28 +11,31 @@ plugin.tx_knsitemap_pi1 {
 	text-decoration: none;
 	font-size: 10px;
 }
+.tx-knsitemap-pi1 span {
+	cursor: pointer;
+}
 .tx-knsitemap-pi1 img {
 	vertical-align: middle;
 	border: none;
 }
 .tx-knsitemap-pi1 ul {
-	 list-style: none; 
-	 margin: 0; 
-	 padding: 0; 
-	 padding-left: 17px; 
+	 list-style: none;
+	 margin: 0;
+	 padding: 0;
+	 padding-left: 17px;
 }
-.tx-knsitemap-pi1 ul li{ 
-	list-style: none; 
-	margin: 0; 
-	padding: 0; 
-	line-height: 10px; 
+.tx-knsitemap-pi1 ul li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	line-height: 10px;
 	white-space: nowrap;
 }
 .tx-knsitemap-pi1 ul li.expanded ul {
-	background: transparent url('../typo3conf/ext/kn_sitemap/res/line.gif') repeat-y top left; 
+	background: transparent url('../typo3conf/ext/kn_sitemap/res/line.gif') repeat-y top left;
 }
-.tx-knsitemap-pi1 ul li.last > ul { 
-	background: none; 
+.tx-knsitemap-pi1 ul li.last > ul {
+	background: none;
 }
 	)
 }

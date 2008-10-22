@@ -128,10 +128,10 @@ if ($leeren){
 	// Letzter Menupunkt?
 	if($last){
 		// Öffneder Link abgeschlossen
-		$result .= '<a class="open" href="'.$requestUri.'#" title="Open" onClick="upd(\''.$thisUid['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></a>';
+		$result .= '<span class="open" title="Open" onClick="upd(\''.$thisUid['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></span>';
 	}else{
 		// Öffnender Link normal
-		$result .= '<a class="open" href="'.$requestUri.'#" title="Open" onClick="upd(\''.$thisUid['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></a>';
+		$result .= '<span class="open" title="Open" onClick="upd(\''.$thisUid['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></span>';
 	}
 	// Text-Link
 	$result .= '<a href="'.$cObj->getTypoLink_URL($thisUid['uid']).'" title="'.$titleTag.'" target="'.$iconArray[$thisUid['doktype']]['target'].'"><img src="typo3conf/ext/kn_sitemap/res/'.$iconArray[$thisUid['doktype']]['icon'].'" width="16" height="16" title="'.$titleTag.'" alt="'.$titleTag.'" />'.$thisUid['title'].'</a>';
@@ -143,11 +143,11 @@ if ($leeren){
 	// Letzter Menupunkt?
 	if($last){
 		// Schliessender Link abgeschlossen:
-		$result .= '<a class="close" href="'.$requestUri.'#" title="Close" onClick="upd(\''.$thisUid['uid'].'\',\'1\',\'1\');"><img src="typo3conf/ext/kn_sitemap/res/minusbottom.gif" width="18" height="16" alt="+" /></a>';
+		$result .= '<span class="close" title="Close" onClick="upd(\''.$thisUid['uid'].'\',\'1\',\'1\');"><img src="typo3conf/ext/kn_sitemap/res/minusbottom.gif" width="18" height="16" alt="+" /></span>';
 		$liClass = 'expanded last';
 	}else{
 		// Schliessender Link normal:
-		$result .= '<a class="close" href="'.$requestUri.'#" title="Close" onClick="upd(\''.$thisUid['uid'].'\',\'0\',\'1\');"><img src="typo3conf/ext/kn_sitemap/res/minus.gif" width="18" height="16" alt="+" /></a>';
+		$result .= '<span class="close" title="Close" onClick="upd(\''.$thisUid['uid'].'\',\'0\',\'1\');"><img src="typo3conf/ext/kn_sitemap/res/minus.gif" width="18" height="16" alt="+" /></span>';
 	}
 	// Text-Link
 	$result .= '<a href="'.$cObj->getTypoLink_URL($thisUid['uid']).'" title="'.$titleTag.'" target="'.$iconArray[$thisUid['doktype']]['target'].'"><img src="typo3conf/ext/kn_sitemap/res/'.$iconArray[$thisUid['doktype']]['icon'].'" width="16" height="16" title="'.$titleTag.'" alt="'.$titleTag.'" />'.$thisUid['title'].'</a>';
@@ -177,11 +177,11 @@ while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2)){
 		// Letzte Subseite?
 		if ($i >= $countSubpages){
 			// Öffnender Link abgeschlossen:
-			$linkToSubpages= '<a class="open" href="'.$requestUri.'#" title="Open" onClick="upd(\''.$row['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></a>';
+			$linkToSubpages= '<span class="open" title="Open" onClick="upd(\''.$row['uid'].'\',\'1\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plusbottom.gif" width="18" height="16" alt="+" /></span>';
 			$class = 'hasSubpages';
 		}else{
 			// Öffnender Link normal:
-			$linkToSubpages= '<a class="open" href="'.$requestUri.'#" title="Open" onClick="upd(\''.$row['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></a>';
+			$linkToSubpages= '<span class="open" title="Open" onClick="upd(\''.$row['uid'].'\',\'0\',\'0\');"><img src="typo3conf/ext/kn_sitemap/res/plus.gif" width="18" height="16" alt="+" /></span>';
 			$class = 'hasSubpages';
 		}
 	}else{
