@@ -37,8 +37,6 @@ require_once (t3lib_extMgm::extPath("jquery") . "class.tx_jquery.php");
  * @author Martin Kuster <martin.kuster@kuehne-nagel.com>
  * @package	TYPO3
  * @subpackage kn_sitemap
- * @version $Id: class.tx_knsitemap_pi1.php,v 1.10 2008/10/16 11:10:09 Martin.Kuster Exp $
- *
  */
 class tx_knsitemap_pi1 extends tslib_pibase {
 
@@ -64,31 +62,31 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	 * Starting Point (ID)
 	 * @var integer
 	 */
-	private $startPoint;
+	private $startingPoint;
 
 	/*
 	 * Where string of get pages sql statement
 	 * @var string
 	 */
-	private $whereKriterium;
+	private $whereClause;
 
 	/*
 	 * Pages to hide
 	 * @var string
 	 */
-	private $notShow;
+	private $pageIDsToHide;
 
 	/*
 	 * What to show?
 	 * @var integer
 	 */
-	private $showMore;
+	private $showMoreLinkConfiguration;
 
 	/*
 	 * Doktypes to show
 	 * @var string
 	 */
-	private $showDoktyp;
+	private $showDoktypConfiguration;
 
 	/*
 	 * JS-Code to append to the content
@@ -120,7 +118,6 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
-		$content = '';
 
 		$content .= '<ul>' . $this->outputStartpoint() . $this->outputSubpages() . '</ul>';
 
@@ -133,7 +130,7 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	}
 
 	/**
-	 * Initialisierung
+	 * Initialisation
 	 *
 	 * @param array $conf: The PlugIn configuration
 	 * @return void
@@ -155,17 +152,17 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	}
 
 	/**
-	 * Erstellen where-Bedingungen
+	 * Init where-clause
 	 * @return void
 	 */
 	function initWhereClause() {
-		$this->whereKriterium = '
+		$this->whereClause = '
 			AND deleted=0
 			AND hidden=0
 			AND nav_hide=0
 			AND NOT(`t3ver_state`=1)
-			AND doktype IN (' . $this->showDoktyp . ')
-			AND uid NOT IN (' . $this->notShow . ')
+			AND doktype IN (' . $this->showDoktypConfiguration . ')
+			AND uid NOT IN (' . $this->pageIDsToHide . ')
 			AND (`starttime`<=' . time() . ')
 			AND (`endtime`=0
 				OR `endtime`>' . time() . ')
@@ -183,9 +180,8 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		';
 	}
 
-
 	/**
-	 * Auslesen Plugin-Konf
+	 * Init Plugin-Configuration
 	 * @return void
 	 */
 	function initPluginConf() {
@@ -193,10 +189,10 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		$this->ff = $this->cObj->data['pi_flexform'];
 
 		// Startingpoint:
-		$this->startPoint = $this->pi_getFFvalue($this->ff, 'startingpoint', 'sDEF');
+		$this->startingPoint = $this->pi_getFFvalue($this->ff, 'startingpoint', 'sDEF');
 		// Exclude
-		$this->notShow = $this->pi_getFFvalue($this->ff, 'exclude_pages', 'sDEF');
-		if (strlen($this->notShow) < 1) $this->notShow = '0';
+		$this->pageIDsToHide = $this->pi_getFFvalue($this->ff, 'exclude_pages', 'sDEF');
+		if (strlen($this->pageIDsToHide) < 1) $this->pageIDsToHide = '0';
 		// URI:
 		$this->requestUri = $_SERVER["REQUEST_URI"];
 	}
@@ -223,31 +219,49 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 
 		if ($showDescription == '1') {
 			if ($showSubtitle == '1') {
-				$this->showMore = '3';
+				$this->showMoreLinkConfiguration = '3';
 			} else {
-				$this->showMore = '1';
+				$this->showMoreLinkConfiguration = '1';
 			}
 		} else {
 			if ($showSubtitle == '1') {
-				$this->showMore = '2';
+				$this->showMoreLinkConfiguration = '2';
 			} else {
-				$this->showMore = '0';
+				$this->showMoreLinkConfiguration = '0';
 			}
 		}
 
-		$this->showDoktyp = $doktype;
+		$this->showDoktypConfiguration = $doktype;
 
-		$this->iconArray = array('0' => array('icon' => 'pages.gif', 'target' => '_top'), '1' => array('icon' => 'pages.gif', 'target' => '_top'), '2' => array('icon' => 'pages.gif', 'target' => '_top'), '3' => array('icon' => 'pages_link.gif', 'target' => '_blank'), '4' => array('icon' => 'pages.gif', 'target' => '_top'), '111' => array('icon' => 'pages.gif', 'target' => '_top'));
+		$this->iconArray = array(
+			'0' => array(
+				'icon' => 'pages.gif',
+				'target' => '_top'),
+			'1' => array(
+				'icon' => 'pages.gif',
+				'target' => '_top'),
+			'2' => array(
+				'icon' => 'pages.gif',
+				'target' => '_top'),
+			'3' => array(
+				'icon' => 'pages_link.gif',
+				'target' => '_blank'),
+			'4' => array(
+				'icon' => 'pages.gif',
+				'target' => '_top'),
+			'111' => array(
+				'icon' => 'pages.gif',
+				'target' => '_top'));
 	}
 
 	/**
-	 * Printing of 1-level subpages (always visible)
+	 * Returns content of 1-level subpages (always visible)
 	 *
 	 * @return string output
 	 */
 	function outputSubpages() {
 		$content = '';
-		$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'pid=' . $this->startPoint . $this->whereKriterium);
+		$res2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'pid=' . $this->startingPoint . $this->whereClause);
 		// Count subpages
 		$countSubpages = $GLOBALS['TYPO3_DB']->sql_num_rows($res2);
 		$i = 1;
@@ -255,9 +269,9 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res2)) {
 			$linkToSubpages = '';
 			$class = '';
-			$titleTag = $this->getTitleTag($this->showMore, $row);
+			$titleTag = $this->getTitleTag($row);
 			// has page subpages?
-			$res3 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid', 'pages', 'pid=' . $row['uid'] . $this->whereKriterium);
+			$res3 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid', 'pages', 'pid=' . $row['uid'] . $this->whereClause);
 			// Count sub-subpages
 			$countSubSubpages = $GLOBALS['TYPO3_DB']->sql_num_rows($res3);
 			// if subsubpages exists
@@ -298,21 +312,20 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	}
 
 	/**
-	 * Print strating-point
+	 * Print starting-point
 	 *
 	 * @return string output
 	 */
 	function outputStartpoint() {
 		$content = '';
-		$res1 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . $this->startPoint . $this->whereKriterium);
+		$res1 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . $this->startingPoint . $this->whereClause);
 		$thisUid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res1);
 
 		if (is_array($thisUid)) {
-			$titleTag = $this->getTitleTag($this->showMore, $thisUid);
+			$titleTag = $this->getTitleTag($thisUid);
 		} else {
 			$titleTag = '';
 		}
-
 
 		$content .= '<li id="UL' . $thisUid['uid'] . '"><a href="?id=' . $thisUid['uid'] . '" title="' . $titleTag . '"><img src="typo3conf/ext/kn_sitemap/res/pages.gif" width="16" height="16" alt="' . $titleTag . '" title="' . $titleTag . '" />' . $thisUid['title'] . '</a></li>';
 
@@ -326,24 +339,24 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	 * @param array record
 	 * @return String rendered content of title-tag
 	 */
-	function getTitleTag($config, array $data) {
+	function getTitleTag(array $data) {
 		$titleTag = '';
 
-		if ($config == "1") {
+		if ($this->showMoreLinkConfiguration == "1") {
 			// desc
 			if (strlen($data['description']) > 0) {
 				$titleTag = $data['description'];
 			} else {
 				$titleTag = $data['title'];
 			}
-		} elseif ($config == "2") {
+		} elseif ($this->showMoreLinkConfiguration == "2") {
 			// sub
 			if (strlen($data['subtitle']) > 0) {
 				$titleTag = $data['subtitle'];
 			} else {
 				$titleTag = $data['title'];
 			}
-		} elseif ($config == "3") {
+		} else {
 			//both
 			if (strlen($data['description']) > 0) {
 				if (strlen($data['subtitle']) > 0) {
@@ -378,12 +391,12 @@ class tx_knsitemap_pi1 extends tslib_pibase {
     			type: \'POST\',
     			data: {
     				uid: myUid,
-    				exclude: \'' . htmlspecialchars(serialize($this->notShow)) . '\',
+    				exclude: \'' . htmlspecialchars(serialize($this->pageIDsToHide)) . '\',
     				isLast: last,
     				toClose: close,
     				requestUri: \'' . $this->requestUri . '\',
-    				showMore: \'' . $this->showMore . '\',
-    				showDoktyp: \'' . htmlspecialchars(serialize($this->showDoktyp)) . '\',
+    				showMore: \'' . $this->showMoreLinkConfiguration . '\',
+    				showDoktypConfiguration: \'' . htmlspecialchars(serialize($this->showDoktypConfiguration)) . '\',
     				iconArray: \'' . htmlspecialchars(serialize($this->iconArray)) . '\'
 				},
     			dataType: \'text\',
