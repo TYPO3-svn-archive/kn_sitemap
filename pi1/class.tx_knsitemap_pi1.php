@@ -307,7 +307,12 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		$res1 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . $this->startPoint . $this->whereKriterium);
 		$thisUid = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res1);
 
-		$titleTag = $this->getTitleTag($this->showMore, $thisUid);
+		if (is_array($thisUid)) {
+			$titleTag = $this->getTitleTag($this->showMore, $thisUid);
+		} else {
+			$titleTag = '';
+		}
+
 
 		$content .= '<li id="UL' . $thisUid['uid'] . '"><a href="?id=' . $thisUid['uid'] . '" title="' . $titleTag . '"><img src="typo3conf/ext/kn_sitemap/res/pages.gif" width="16" height="16" alt="' . $titleTag . '" title="' . $titleTag . '" />' . $thisUid['title'] . '</a></li>';
 
@@ -395,11 +400,6 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		function closeAll(){
 			' . $this->closeJSCode . '
 		}
-
-		$(function(){
-		//	$.ajaxHistory.initialize();
-
-		});
 	// ]]>
 </script>
 		';
