@@ -35,8 +35,6 @@ require_once (t3lib_extMgm::extPath("jquery") . "class.tx_jquery.php");
  * Plugin 'Sitemap' for the 'kn_sitemap' extension.
  *
  * @author Martin Kuster <martin.kuster@kuehne-nagel.com>
- * @package	TYPO3
- * @subpackage kn_sitemap
  */
 class tx_knsitemap_pi1 extends tslib_pibase {
 
@@ -236,22 +234,29 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 		$this->iconArray = array(
 			'0' => array(
 				'icon' => 'pages.gif',
-				'target' => '_top'),
+				'target' => '_top'
+			),
 			'1' => array(
 				'icon' => 'pages.gif',
-				'target' => '_top'),
+				'target' => '_top'
+			),
 			'2' => array(
 				'icon' => 'pages.gif',
-				'target' => '_top'),
+				'target' => '_top'
+			),
 			'3' => array(
 				'icon' => 'pages_link.gif',
-				'target' => '_blank'),
+				'target' => '_blank'
+			),
 			'4' => array(
 				'icon' => 'pages.gif',
-				'target' => '_top'),
+				'target' => '_top'
+			),
 			'111' => array(
 				'icon' => 'pages.gif',
-				'target' => '_top'));
+				'target' => '_top'
+			)
+		);
 	}
 
 	/**
