@@ -34,7 +34,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'depends' => array(
 			'typo3' => '4.1-0.0.0',
 			'php' => '5.1.0-0.0.0',
-			'jquery' => '1.2.0-',
+			'kn_lib' => '5.1.0-0.0.0',
 		),
 		'conflicts' => array(
 		),
