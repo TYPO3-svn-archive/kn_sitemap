@@ -29,7 +29,6 @@
  */
 
 require_once (PATH_tslib . 'class.tslib_pibase.php');
-require_once (t3lib_extMgm::extPath("jquery") . "class.tx_jquery.php");
 
 /**
  * Plugin 'Sitemap' for the 'kn_sitemap' extension.
@@ -116,6 +115,7 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	 */
 	function main($content, $conf) {
 		$this->init($conf);
+		$content = '';
 
 		$content .= '<ul>' . $this->outputStartpoint() . $this->outputSubpages() . '</ul>';
 
@@ -200,9 +200,8 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 	 * @return void
 	 */
 	function initJQuery() {
-		tx_jquery::setPlugins(array());
-		tx_jquery::includeLib();
-		tx_jquery::setCompatibility(false);
+		$jQuery = new tx_knlib_jquery();
+		$jQuery->render();
 	}
 
 	/**
@@ -401,7 +400,7 @@ class tx_knsitemap_pi1 extends tslib_pibase {
     				toClose: close,
     				requestUri: \'' . $this->requestUri . '\',
     				showMore: \'' . $this->showMoreLinkConfiguration . '\',
-    				showDoktypConfiguration: \'' . htmlspecialchars(serialize($this->showDoktypConfiguration)) . '\',
+    				showDoktyp: \'' . htmlspecialchars(serialize($this->showDoktypConfiguration)) . '\',
     				iconArray: \'' . htmlspecialchars(serialize($this->iconArray)) . '\'
 				},
     			dataType: \'text\',
