@@ -158,23 +158,23 @@ class tx_knsitemap_pi1 extends tslib_pibase {
 			AND deleted=0
 			AND hidden=0
 			AND nav_hide=0
-			AND NOT(`t3ver_state`=1)
+			AND NOT(t3ver_state=1)
 			AND doktype IN (' . $this->showDoktypConfiguration . ')
 			AND uid NOT IN (' . $this->pageIDsToHide . ')
-			AND (`starttime`<=' . time() . ')
-			AND (`endtime`=0
-				OR `endtime`>' . time() . ')
-			AND (`fe_group`=\'\'
-				OR `fe_group` IS NULL
-				OR `fe_group`=\'0\'
-				OR (`fe_group` LIKE \'%,0,%\'
-					OR `fe_group` LIKE \'0,%\'
-					OR `fe_group` LIKE \'%,0\'
-					OR `fe_group`=\'0\')
-				OR (`fe_group` LIKE \'%,-1,%\'
-					OR `fe_group` LIKE \'-1,%\'
-					OR `fe_group` LIKE \'%,-1\'
-					OR `fe_group`=\'-1\'))
+			AND (starttime<=' . time() . ')
+			AND (endtime=0
+				OR endtime>' . time() . ')
+			AND (fe_group=\'\'
+				OR fe_group IS NULL
+				OR fe_group=\'0\'
+				OR (fe_group LIKE \'%,0,%\'
+					OR fe_group LIKE \'0,%\'
+					OR fe_group LIKE \'%,0\'
+					OR fe_group=\'0\')
+				OR (fe_group LIKE \'%,-1,%\'
+					OR fe_group LIKE \'-1,%\'
+					OR fe_group LIKE \'%,-1\'
+					OR fe_group=\'-1\'))
 		';
 	}
 

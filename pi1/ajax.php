@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Ajax-Class
  *
@@ -87,23 +87,23 @@ $showDoktyp = unserialize(htmlspecialchars_decode(t3lib_div::_POST('showDoktyp')
 $whereKriterium = ' AND deleted=0
 					AND hidden=0
 					AND nav_hide=0
-					AND NOT(`t3ver_state`=1)
+					AND NOT(t3ver_state=1)
 					AND doktype IN (' . $showDoktyp . ')
 					AND uid NOT IN (' . $notShow . ')
-					AND (`starttime`<=' . time() . ')
-					AND (`endtime`=0
-						OR `endtime`>' . time() . ')
-					AND (`fe_group`=\'\'
-						OR `fe_group` IS NULL
-						OR `fe_group`=\'0\'
-						OR (`fe_group` LIKE \'%,0,%\'
-							OR `fe_group` LIKE \'0,%\'
-							OR `fe_group` LIKE \'%,0\'
-							OR `fe_group`=\'0\')
-						OR (`fe_group` LIKE \'%,-1,%\'
-							OR `fe_group` LIKE \'-1,%\'
-							OR `fe_group` LIKE \'%,-1\'
-							OR `fe_group`=\'-1\'))
+					AND (starttime<=' . time() . ')
+					AND (endtime=0
+						OR endtime>' . time() . ')
+					AND (fe_group=\'\'
+						OR fe_group IS NULL
+						OR fe_group=\'0\'
+						OR (fe_group LIKE \'%,0,%\'
+							OR fe_group LIKE \'0,%\'
+							OR fe_group LIKE \'%,0\'
+							OR fe_group=\'0\')
+						OR (fe_group LIKE \'%,-1,%\'
+							OR fe_group LIKE \'-1,%\'
+							OR fe_group LIKE \'%,-1\'
+							OR fe_group=\'-1\'))
 ';
 //FIXME XSS saeubern!
 
